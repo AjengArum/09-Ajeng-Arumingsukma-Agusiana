@@ -23,7 +23,7 @@
                     <div class="col-sm-12">
                         <div class="row">
                             <div class="col-sm-4">
-                                <img src="<?= base_url('assets/file/foto.jpg') ?>" class="img-thumbnail">
+                                <img src="<?= base_url('assets/file/AJENG.jpg') ?>" class="img-thumbnail">
                             </div>
                             <div class="col-sm-8">
                                 <label for="email" class="col-sm-2 col-form-label">Nama</label>

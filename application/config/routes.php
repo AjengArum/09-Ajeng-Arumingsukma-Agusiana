@@ -49,9 +49,51 @@ defined('BASEPATH') or exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'Kelola_arsip';
+$route['default_controller'] = 'auth';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-$route['arsip'] = 'Kelola_arsip';
-$route['kategori'] = 'Kelola_kategori';
-$route['kategori'] = 'Kelola_kategori';
+
+//admin
+$route['dashboard'] = 'Dashboard';
+$route['jadwal'] = 'KelolaJadwal_admin';
+$route['layanan'] = 'KelolaLayanan';
+$route['member'] = 'KelolaMember_admin';
+$route['tagihan'] = 'KelolaPembayaran';
+$route['pembayaran'] = 'RekapPembayaran';
+$route['absensi'] = 'KelolaAbsensi_admin';
+$route['rekap'] = 'KelolaRekap';
+
+//pemilik
+$route['dashboard_pm'] = 'Dashboard_pm';
+$route['member_pm'] = 'Murid_Pm';
+$route['pembayaran_pm'] = 'Pembayaran_Pm';
+$route['tentor'] = 'KelolaTentor_admin';
+$route['rekap_pm'] = 'LihatRekap';
+$route['about'] = 'About';
+
+//API
+$route['pembayaran_json/(:num)'] = 'api/Manage_all/get_pembayaran/$1';
+$route['pembayaran_json'] = 'api/Manage_all/get_pembayaran';
+$route['tagihan_json'] = 'api/Manage_all/get_tagihan';
+$route['api/manage_all/insert_murid'] = 'api/manage_all/insert_murid_post';
+$route['api/manage_all/KelolaLayanan'] = 'api/Manage_all/get_layanan';
+$route['api/manage_all/KelolaRekap'] = 'api/Manage_all/get_rekap';
+$route['api/manage_all/insert_user'] = 'api/manage_all/insert_user_post';
+
+//ANDROID
+//$route['login'] = 'api/Authh/login';
+$route['api/manage_all/register'] = 'api/Manage_all/register_post';
+$route['api/manage_all/login'] = 'api/Manage_all/login_post';
+$route['kelola_android'] = 'api/Manage_all/get_layanan';
+$route['kelola_daftar'] = 'api/Manage_all/daftar_post';
+// $route['kelola_absen'] = 'api/Manage_all/insert_absen_post';
+$route['kelola_absen'] = 'api/Manage_all/insert_absen';
+$route['kelola_tentor_android'] = 'api/Manage_all/get_tentor';
+$route['kelola_jadwal_ku'] = 'api/Manage_all/get_jadwal';
+
+
+$route['rekap/(:num)'] = 'api/Manage_all/get_rekap/$1';
+
+
+
+

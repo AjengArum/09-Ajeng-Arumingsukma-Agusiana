@@ -33,17 +33,17 @@ class Data_model extends CI_Model
         return $query;
     }
 
-    public function get_file_name($table, $where, $field)
+    public function get_file_name($table, $where, $field_name)
     {
-        $this->db->select($field);
+        $this->db->select($field_name);
         $this->db->where($where);
         $query = $this->db->get($table);
+        $result = $query->row();
 
-        if ($query->num_rows() > 0) {
-            $row = $query->row();
-            return $row->file_name;
+        if (isset($result->$field_name)) {
+            return $result->$field_name;
         } else {
-            return null;
+            return null; // Atau nilai default lainnya jika diperlukan
         }
     }
 
@@ -188,4 +188,5 @@ class Data_model extends CI_Model
         $query = $this->db->query($query);
         return $query;
     }
+    
 }

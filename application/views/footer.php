@@ -5,7 +5,7 @@
 </div> <!-- content -->
 
 <footer class="footer">
-    Pengarsipan Surat - Ajeng Arumingsukma - 2023
+    TUGAS AKHIR - Ajeng Arumingsukma - 2024
 </footer>
 
 </div>
