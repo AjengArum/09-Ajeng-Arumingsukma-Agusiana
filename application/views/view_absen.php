@@ -1,4 +1,4 @@
-view absen
+<!-- view absen -->
 <div class="row">
     <div class="col-sm-12">
         <div class="page-title-box">
@@ -30,7 +30,7 @@ view absen
                     <?php endforeach; ?>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary">Export</button>
+            <!-- <button type="submit" class="btn btn-primary">Export</button> -->
         </form>
         <hr>
         <table id="example" class="table table-hover table-bordered" style="width:100%">

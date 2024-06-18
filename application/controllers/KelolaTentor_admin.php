@@ -134,9 +134,6 @@ class KelolaTentor_admin extends CI_Controller
 
         if ($this->form_validation->run() == false) {
             $response['errors'] = $this->form_validation->error_array();
-            if (empty($_FILES['foto']['name'])) {
-                $response['errors']['foto'] = "Foto harus diupload";
-            }
             if (empty($this->input->post('id_user'))) {
                 $response['errors']['id_user'] = "Username harus dipilih";
             }
@@ -145,10 +142,6 @@ class KelolaTentor_admin extends CI_Controller
             $nama = $this->input->post('nama');
             $jenjang = $this->input->post('jenjang');
             $id_user = $this->input->post('id_user');
-
-            if (empty($_FILES['foto']['name'])) {
-                $response['errors']['foto'] = "Foto harus diupload";
-            }
 
             if (empty($this->input->post('id_user'))) {
                 $response['errors']['id_user'] = "Username harus dipilih";
@@ -174,9 +167,7 @@ class KelolaTentor_admin extends CI_Controller
                         $uploaded_data = $this->upload->data();
                         $data['foto'] = $uploaded_data['file_name'];
                     }
-                } else {
-                    $response['errors']['foto'] = "Foto harus diupload";
-                };
+                } 
                 
                 $where = array('id_tentor' => $id);
                 $this->data->update('tb_tentor', $where, $data);

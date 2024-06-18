@@ -23,7 +23,7 @@
                     <th width="20%">Username</th>
                     <th width="20%">bulan</th>
                     <th width="20%">Jumlah</th>
-                    <th width="5%">Status Tagihan</th>
+                    <th width="5%">Status</th>
                     <th width="15%">Aksi</th>
                 </tr>
             </thead>

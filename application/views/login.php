@@ -162,7 +162,7 @@
     <div class="background"></div>
     <div class="card">
         <img src="assets/file/logo_ku.png" alt="logo" class="logo" />
-        <h2>Sign in to your account</h2>
+        <h2>Login</h2>
         <form class="form" method="post" action="<?php echo base_url('Auth/index'); ?>">
             <?= $this->session->flashdata('error'); ?>
             <input type="username" id="username" name="username" placeholder="Username" value="<?= set_value('username'); ?>" />

@@ -82,7 +82,7 @@ class KelolaAbsensi_admin extends CI_Controller
                 $response['errors']['id_user'] = "Tentor harus dipilih";
             }
         } else {
-            $tgl_absensi = $this->input->post('tgl_absensi');
+            $tgl_absen = $this->input->post('tgl_absen');
             $materi = $this->input->post('materi');
             $status = $this->input->post('status');
 
@@ -94,7 +94,7 @@ class KelolaAbsensi_admin extends CI_Controller
             } else {
                 $data = array(
                     'id_user' => $id_user = $this->input->post('id_user'),
-                    'tgl_absen' => $tgl_absensi,
+                    'tgl_absen' => $tgl_absen,
                     'materi' => $materi,
                     'status' => $status,
                 );
@@ -162,7 +162,7 @@ class KelolaAbsensi_admin extends CI_Controller
         } else {
             $id = $this->input->post('id_absensi');
             $id_user = $this->input->post('id_user');
-            $tgl_absensi = $this->input->post('tgl_absensi');
+            $tgl_absen = $this->input->post('tgl_absen');
             $materi = $this->input->post('materi');
             $status = $this->input->post('status');
 
@@ -171,7 +171,7 @@ class KelolaAbsensi_admin extends CI_Controller
             } else {
                 $data = array(
                     'id_user' => $id_user,
-                    'tgl_absen' => $tgl_absensi,
+                    'tgl_absen' => $tgl_absen,
                     'materi' => $materi,
                     'status' => $status,
                 );
@@ -202,7 +202,7 @@ class KelolaAbsensi_admin extends CI_Controller
 
     public function export_pdf()
     {
-        $id_user = $this->input->post('filterTentor');
+        $id_user = $this->input->post('filterUser');
         $query = [
             'select' => 'a.id_absensi, a.tgl_absen, a.materi, a.bukti, a.status, b.username',
             'from' => 'tb_absen a',

@@ -42,9 +42,10 @@ class Manage_all extends RestController
     //     $this->response($this->all->get_pembayaran(), RestController::HTTP_OK);
     // }
 
-    public function get_tagihan_get()
+    public function get_tagihan_get($id_user)
     {
-        $this->response($this->all->get_tagihan(), RestController::HTTP_OK);
+        $result = $this->all->get_tagihan($id_user);
+        $this->response($result, RestController::HTTP_OK);
     }
 
     public function get_layanan_get()
@@ -77,6 +78,12 @@ class Manage_all extends RestController
     public function get_jadwal_get()
     {
         $this->response($this->all->get_jadwal(), RestController::HTTP_OK);
+    }
+
+    public function get_absen_get($id_user)
+    {
+        $result = $this->all->get_absen($id_user);
+        $this->response($result, RestController::HTTP_OK);
     }
 
     // public function get_produk_terbaru_get()
@@ -135,15 +142,36 @@ class Manage_all extends RestController
     }
 }
 
-// public function insert_absen_post()
+// public function absen_post()
 // {
 //     $id_user = $this->input->post('id_user');
 //     $tgl_absen = $this->input->post('tgl_absen');
 //     $materi = $this->input->post('materi');
-//     $bukti = $this->input->post('bukti');
-//     $status = $this->input->post('status');
+//     $bukti = null;
+//     $status = 'menunggu_validasi';
 
-//     $result = $this->all->absen($id_user, $tgl_absen, $materi, $bukti);
+//     // Handle file upload
+//     if (!empty($_FILES['bukti']['name'])) {
+//         $config['upload_path'] = './assets/file/';
+//         $config['allowed_types'] = 'jpeg|png|jpg|gif';
+//         $config['max_size'] = 2048;
+//         $config['file_name'] = time();
+
+//         $this->load->library('upload', $config);
+
+//         if ($this->upload->do_upload('bukti')) {
+//             $uploadData = $this->upload->data();
+//             $bukti = 'assets/file/' . $uploadData['file_name'];
+//         } else {
+//             $this->response([
+//                 "success" => false,
+//                 'message' => 'Gagal mengunggah foto: ' . $this->upload->display_errors()
+//             ], RestController::HTTP_INTERNAL_SERVER_ERROR);
+//             return;
+//         }
+//     }
+
+//     $result = $this->all->absen($id_user, $tgl_absen, $materi, $bukti, $status);
 
 //     if ($result["success"]) {
 //         $this->response($result, RestController::HTTP_OK);
@@ -152,35 +180,15 @@ class Manage_all extends RestController
 //     }
 // }
 
-public function insert_absen_post() {
-    $id_user = $this->post('id_user');
-    $tgl_absen = $this->post('tgl_absen');
-    $materi = $this->post('materi');
-    $status = $this->post('status');
 
-    // Handle file upload
-    $bukti = null;
-    if (!empty($_FILES['bukti']['name'])) {
-        $config['upload_path'] = './assets/laporan/';
-        $config['allowed_types'] = 'jpeg|png|jpg|gif';
-        $config['max_size'] = 2048;
-        $config['file_name'] = time();
+public function absen_post()
+{
+    $id_user = $this->input->post('id_user');
+    $tgl_absen = $this->input->post('tgl_absen');
+    $materi = $this->input->post('materi');
+    $bukti = $this->input->post('bukti');
+    $status = 'menunggu_validasi';
 
-        $this->upload->initialize($config);
-
-        if ($this->upload->do_upload('bukti')) {
-            $uploadData = $this->upload->data();
-            $bukti = 'assets/laporan/' . $uploadData['file_name'];
-        } else {
-            $this->response([
-                "success" => false,
-                'message' => 'Gagal mengunggah foto: ' . $this->upload->display_errors()
-            ], RestController::HTTP_INTERNAL_SERVER_ERROR);
-            return;
-        }
-    }
-
-    // Call model method
     $result = $this->all->absen($id_user, $tgl_absen, $materi, $bukti, $status);
 
     if ($result["success"]) {
@@ -196,9 +204,8 @@ public function daftar_post()
     $id_layanan = $this->input->post('id_layanan');
     $nama = $this->input->post('nama');
     $asal_sekolah = $this->input->post('asal_sekolah');
-    $kelas = $this->input->post('kelas');
 
-    $result = $this->all->daftar($id_user, $id_layanan, $nama, $asal_sekolah, $kelas);
+    $result = $this->all->daftar($id_user, $id_layanan, $nama, $asal_sekolah);
 
     if ($result["success"]) {
         $this->response($result, RestController::HTTP_OK);

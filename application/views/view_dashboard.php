@@ -30,7 +30,7 @@
                         <h5 class="mt-0 round-inner">
                             LEMBAGA BIMBINGAN BELAJAR ANG LESSON
                         </h5>
-                        <p class="mb-0 text-muted">Jumlah Kategori</p>
+                        <p class="mb-0 text-muted">Lembaga Bimbingan Belajar Ang Lesson merupakan lembaga bimbingan belajar yang telah menjadi mitra terpercaya orang tua selama 4 tahun dalam mendukung prestasi anak dalam bidang akademik</p>
                         </div>
                     </div>
                 </div>
@@ -66,7 +66,7 @@
                     <div class="d-flex flex-row">
                         <div class="col-3 align-self-center">
                             <div class="round">
-                                <i class="mdi mdi-view-list"></i>
+                                <i class="mdi mdi-account-circle"></i>
                             </div>
                         </div>
                         <div class="col-9 text-center align-self-center">
@@ -88,7 +88,7 @@
                     <div class="d-flex flex-row">
                         <div class="col-3 align-self-center">
                             <div class="round">
-                                <i class="mdi mdi-view-list"></i>
+                                <i class="mdi mdi-currency-usd"></i>
                             </div>
                         </div>
                         <div class="col-9 text-center align-self-center">

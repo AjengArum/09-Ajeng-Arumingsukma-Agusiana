@@ -30,7 +30,7 @@ class Murid_Pm extends CI_Controller
     public function get_data()
     {
         $query = [
-            'select' => 'a.id_murid, b.username, c.nama_layanan, a.nama, a.asal_sekolah, a.kelas',
+            'select' => 'a.id_murid, b.username, c.nama_layanan, a.nama, a.asal_sekolah',
             'from' => 'tb_murid a',
             'join' => [
                 'tb_user b, b.ID = a.id_user',
@@ -51,7 +51,7 @@ class Murid_Pm extends CI_Controller
     public function export_pdf()
 	{
         $query = [
-            'select' => 'a.id_murid, b.username, c.nama_layanan, a.nama, a.asal_sekolah, a.kelas',
+            'select' => 'a.id_murid, b.username, c.nama_layanan, a.nama, a.asal_sekolah',
             'from' => 'tb_murid a',
             'join' => [
                 'tb_user b, b.ID = a.id_user',

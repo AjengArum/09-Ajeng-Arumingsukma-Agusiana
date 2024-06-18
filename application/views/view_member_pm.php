@@ -4,7 +4,7 @@
             <div class="btn-group float-right">
                 <ol class="breadcrumb hide-phone p-0 m-0">
                     <li class="breadcrumb-item"><a href="<?= base_url() ?>">Ang Lesson</a></li>
-                    <li class="breadcrumb-item active">Murid</li>
+                    <li class="breadcrumb-item active">Data Murid</li>
                 </ol>
             </div>
             <h4 class="page-title"> Data Murid </h4><br>
@@ -26,7 +26,6 @@
                     <th width="20%">Username</th>
                     <th width="20%">Layanan</th>
                     <th width="20%">Asal Sekolah</th>
-                    <th width="5%">Kelas</th>
                 </tr>
             </thead>
             <tbody>

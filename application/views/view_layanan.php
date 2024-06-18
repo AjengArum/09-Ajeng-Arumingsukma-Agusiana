@@ -24,7 +24,6 @@
                     <th width="20%">Nama Layanan</th>
                     <th width="20%">Keterangan</th>
                     <th width="10%">Biaya</th>
-                    <th width="10%">Kuota</th>
                     <th width="10%">Aksi</th>
                 </tr>
             </thead>
@@ -89,14 +88,6 @@
                         <small class="text-danger pl-1" id="error-biaya"></small>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label for="example-text-input" class="col-sm-3 col-form-label">Kuota</label>
-                    <div class="col-sm-9">
-                        <textarea required class="form-control" rows="1" id="kuota" name="kuota"
-                            placeholder="Masukkan kuota"></textarea>
-                        <small class="text-danger pl-1" id="error-kuota"></small>
-                    </div>
-                </div>
             </div>
             <div class="modal-footer">
                             <button type="button" id="btn-insert" onclick="insert_data()" class="btn btn-outline-primary">Simpan</button>
@@ -112,7 +103,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title center" id="exampleModalLabel"><i class="mdi mdi-alert"></i> Alert</h5>
+                <h5 class="modal-title center" id="exampleModalLabel"><i class="mdi mdi-alert"></i> Konfirmasi</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

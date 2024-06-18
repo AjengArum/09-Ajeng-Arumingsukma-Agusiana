@@ -4,10 +4,10 @@
             <div class="btn-group float-right">
                 <ol class="breadcrumb hide-phone p-0 m-0">
                     <li class="breadcrumb-item"><a href="<?= base_url() ?>">Ang Lesson</a></li>
-                    <li class="breadcrumb-item active">Tagihan</li>
+                    <li class="breadcrumb-item active">Data Pembayaran</li>
                 </ol>
             </div>
-            <h4 class="page-title"> Data Tagihan </h4><br>
+            <h4 class="page-title"> Data Pembayaran </h4><br>
             <p class="text-muted font-14">Berikut ini adalah data tagihan lunas murid yang ada pada Lembaga Bimbingan Belajar Ang Lesson <br>
                 Klik "Tambah Tagihan" untuk menambah data tagihan baru
             </p>
@@ -23,7 +23,7 @@
                     <th width="20%">Username</th>
                     <th width="20%">bulan</th>
                     <th width="20%">Jumlah</th>
-                    <th width="5%">Status Tagihan</th>
+                    <th width="5%">Status</th>
                     <th width="15%">Aksi</th>
                 </tr>
             </thead>

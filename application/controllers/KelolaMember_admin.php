@@ -30,7 +30,7 @@ class KelolaMember_admin extends CI_Controller
     public function get_data()
     {
         $query = [
-            'select' => 'a.id_murid, b.username, c.nama_layanan, a.nama, a.asal_sekolah, a.kelas',
+            'select' => 'a.id_murid, b.username, c.nama_layanan, a.nama, a.asal_sekolah',
             'from' => 'tb_murid a',
             'join' => [
                 'tb_user b, b.ID = a.id_user',
@@ -53,7 +53,6 @@ class KelolaMember_admin extends CI_Controller
     {
         $this->form_validation->set_rules('nama', 'nama', 'required|trim');
         $this->form_validation->set_rules('asal_sekolah', 'asal_sekolah', 'required|trim');
-        $this->form_validation->set_rules('kelas', 'kelas', 'required|trim');
 
         if ($this->form_validation->run() == false) {
             $response['errors'] = $this->form_validation->error_array();
@@ -66,7 +65,6 @@ class KelolaMember_admin extends CI_Controller
         } else {
             $nama = $this->input->post('nama');
             $asal_sekolah = $this->input->post('asal_sekolah');
-            $kelas = $this->input->post('kelas');
             $id_user = $this->input->post('id_user');
             $id_layanan = $this->input->post('id_layanan');
 
@@ -81,7 +79,6 @@ class KelolaMember_admin extends CI_Controller
                     'id_layanan' => $id_layanan,
                     'nama' => $nama,
                     'asal_sekolah' => $asal_sekolah,
-                    'kelas' => $kelas,
                 );
                 $this->data->insert('tb_murid', $data);
                 $response['success'] = "Data berhasil ditambahkan";
@@ -108,7 +105,6 @@ class KelolaMember_admin extends CI_Controller
     {
         $this->form_validation->set_rules('nama', 'nama', 'required|trim');
         $this->form_validation->set_rules('asal_sekolah', 'asal_sekolah', 'required|trim');
-        $this->form_validation->set_rules('kelas', 'kelas', 'required|trim');
 
         if ($this->form_validation->run() == false) {
             $response['errors'] = $this->form_validation->error_array();
@@ -122,7 +118,6 @@ class KelolaMember_admin extends CI_Controller
             $id = $this->input->post('id_murid');
             $nama = $this->input->post('nama');
             $asal_sekolah = $this->input->post('asal_sekolah');
-            $kelas = $this->input->post('kelas');
             $id_user = $this->input->post('id_user');
             $id_layanan = $this->input->post('id_layanan');
 
@@ -137,7 +132,6 @@ class KelolaMember_admin extends CI_Controller
                     'nama' => $nama,
                     'id_layanan' => $id_layanan,
                     'asal_sekolah' => $asal_sekolah,
-                    'kelas' => $kelas,
                 );
 
                 $where = array('id_murid' => $id);

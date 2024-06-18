@@ -24,7 +24,6 @@
                     <th width="20%">Username</th>
                     <th width="20%">Layanan</th>
                     <th width="20%">Asal Sekolah</th>
-                    <th width="5%">Kelas</th>
                     <th width="15%">Aksi</th>
                 </tr>
             </thead>
@@ -91,14 +90,7 @@
                                     <input class="form-control" type="text" id="asal_sekolah" name="asal_sekolah" placeholder="Masukkan asal sekolah">
                                     <small class="text-danger pl-1" id="error-asal_sekolah"></small>
                                 </div>
-                            </div> 
-                            <div class="form-group row">
-                                <label for="example-text-input" class="col-sm-3 col-form-label">Kelas</label>
-                                <div class="col-sm-9">
-                                    <input class="form-control" type="text" id="kelas" name="kelas" placeholder="Masukkan kelas">
-                                    <small class="text-danger pl-1" id="error-kelas"></small>
-                                </div>
-                            </div>   
+                            </div>  
                         </div>
                         <div class="modal-footer">
                             <button type="button" id="btn-insert" onclick="insert_data()" class="btn btn-outline-primary">Simpan</button>

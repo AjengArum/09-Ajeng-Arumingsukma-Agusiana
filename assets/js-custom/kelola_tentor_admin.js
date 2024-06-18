@@ -123,7 +123,7 @@ function submit(x) {
 				$("[name='nama']").val(hasil[0].nama);
 				$("[name='jenjang']").val(hasil[0].jenjang);
 				var nama = hasil[0].foto;
-				imagePreview.innerHTML = `<br><img src="${base_url}assets/image/home/carousel/${nama}" alt="Preview Image" class="img-thumbnail" style="width: 100px; height: auto;">`;
+				imagePreview.innerHTML = `<br><img src="${base_url}assets/file/${nama}" alt="Preview Image" class="img-thumbnail" style="width: 100px; height: auto;">`;
 			},
 		});
 	}

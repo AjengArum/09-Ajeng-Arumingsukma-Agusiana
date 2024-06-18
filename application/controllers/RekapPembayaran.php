@@ -47,7 +47,7 @@ class RekapPembayaran extends CI_Controller
         'join' => [
             'tb_user b, b.ID = a.id_user',
         ],
-        'where' => ['a.status_tagihan' => 'lunas']  // Hanya ambil data dengan status belum lunas
+        'where' => ['a.status_tagihan' => 'lunas'] 
     ];
     $result = $this->data->get($query)->result();
     echo json_encode($result);

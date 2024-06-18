@@ -30,7 +30,7 @@ class KelolaLayanan extends CI_Controller
     public function get_data()
     {
         $query = [
-            'select' => 'a.id_layanan, b.nama, a.nama_layanan, a.keterangan, a.biaya, a.kuota',
+            'select' => 'a.id_layanan, b.nama, a.nama_layanan, a.keterangan, a.biaya',
             'from' => 'tb_layanan a',
             'join' => [
                 'tb_tentor b, b.id_tentor = a.id_tentor'
@@ -53,7 +53,6 @@ class KelolaLayanan extends CI_Controller
         $this->form_validation->set_rules('nama_layanan', 'nama_layanan', 'required|trim');
         $this->form_validation->set_rules('keterangan', 'keterangan', 'required|trim');
         $this->form_validation->set_rules('biaya', 'biaya', 'required|trim');
-        $this->form_validation->set_rules('kuota', 'kuota', 'required|trim');
 
         if ($this->form_validation->run() == false) {
             $response['errors'] = $this->form_validation->error_array();
@@ -65,7 +64,6 @@ class KelolaLayanan extends CI_Controller
             $nama_layanan = $this->input->post('nama_layanan');
             $keterangan = $this->input->post('keterangan');
             $biaya = $this->input->post('biaya');
-            $kuota = $this->input->post('kuota');
             $id_tentor = $this->input->post('id_tentor');
 
             if (empty($this->input->post('id_tentor'))) {
@@ -77,7 +75,6 @@ class KelolaLayanan extends CI_Controller
                     'nama_layanan' => $nama_layanan,
                     'keterangan' => $keterangan,
                     'biaya' => $biaya,
-                    'kuota' => $kuota,
                 );
             $this->data->insert('tb_layanan', $data);
             $response['success'] = "Data berhasil ditambahkan";
@@ -92,7 +89,6 @@ class KelolaLayanan extends CI_Controller
     $this->form_validation->set_rules('nama_layanan', 'nama layanan', 'required|trim');
     $this->form_validation->set_rules('keterangan', 'keterangan', 'required|trim');
     $this->form_validation->set_rules('biaya', 'biaya', 'required|trim');
-    $this->form_validation->set_rules('kuota', 'kuota', 'required|trim');
 
     if ($this->form_validation->run() == false) {
         $response['errors'] = $this->form_validation->error_array();
@@ -104,7 +100,6 @@ class KelolaLayanan extends CI_Controller
         $nama_layanan = $this->input->post('nama_layanan');
         $keterangan = $this->input->post('keterangan');
         $biaya = $this->input->post('biaya');
-        $kuota = $this->input->post('kuota');
         $id_tentor = $this->input->post('id_tentor');
 
         if (empty($this->input->post('id_tentor'))) {
@@ -116,7 +111,6 @@ class KelolaLayanan extends CI_Controller
             'nama_layanan' => $nama_layanan,
             'keterangan' => $keterangan,
             'biaya' => $biaya,
-            'kuota' => $kuota,
         );
 
         $where = array('id_layanan' => $id);

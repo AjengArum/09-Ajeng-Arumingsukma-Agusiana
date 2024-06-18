@@ -67,7 +67,7 @@
                         </li>
                         <li>
                             <a href="<?= base_url('jadwal') ?>" class="waves-effect">
-                                <i class="mdi mdi-note"></i>
+                                <i class="mdi mdi-calendar"></i>
                                 <span> Penjadwalan </span>
                             </a>
                         </li>
@@ -79,7 +79,7 @@
                         </li>
                         <li>
                             <a href="<?= base_url('member') ?>" class="waves-effect">
-                                <i class="mdi mdi-database"></i>
+                                <i class="mdi mdi-account-circle"></i>
                                 <span> Murid </span>
                             </a>
                         </li>
@@ -91,22 +91,22 @@
                         </li>
                         <li>
                             <a href="<?= base_url('pembayaran') ?>" class="waves-effect">
-                                <i class="mdi mdi-currency-usd"></i>
-                                <span> Pembayaran </span>
+                                <i class="mdi mdi-database"></i>
+                                <span> Riwayat Pembayaran </span>
                             </a>
                         </li>
                         <li>
                             <a href="<?= base_url('absensi') ?>" class="waves-effect">
-                                <i class="mdi mdi-view-list"></i>
-                                <span> Absensi </span>
+                                <i class="mdi mdi-check"></i>
+                                <span> Absensi Tentor </span>
                             </a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href="<?= base_url('rekap') ?>" class="waves-effect">
                                 <i class="mdi mdi-note"></i>
                                 <span> Rekap Absensi </span>
                             </a>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
 

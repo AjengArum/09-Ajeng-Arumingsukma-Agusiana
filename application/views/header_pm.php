@@ -68,13 +68,13 @@
                         <li>
                             <a href="<?= base_url('member_pm') ?>" class="waves-effect">
                                 <i class="mdi mdi-database"></i>
-                                <span> Daftar Murid </span>
+                                <span> Data Murid </span>
                             </a>
                         </li>
                         <li>
                             <a href="<?= base_url('pembayaran_pm') ?>" class="waves-effect">
                                 <i class="mdi mdi-currency-usd"></i>
-                                <span> Rekap Pembayaran </span>
+                                <span> Data Tagihan </span>
                             </a>
                         </li>
                         <li>
@@ -84,7 +84,7 @@
                             </a>
                         </li>
                         <!-- <li>
-                            <a href="<?= base_url('absensi_pm') ?>" class="waves-effect">
+                            <a href="<?= base_url('') ?>" class="waves-effect">
                                 <i class="mdi mdi-view-list"></i>
                                 <span> Absensi </span>
                             </a>
@@ -92,7 +92,7 @@
                         <li>
                             <a href="<?= base_url('rekap_pm') ?>" class="waves-effect">
                                 <i class="mdi mdi-note"></i>
-                                <span> Rekap Absensi </span>
+                                <span> Data Absensi </span>
                             </a>
                         </li>
                     </ul>

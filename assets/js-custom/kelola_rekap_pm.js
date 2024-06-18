@@ -1,214 +1,136 @@
 get_data();
 
-$("#tb_user").select2({
-	width: "100%",
+$("#filterUser").select2({
+    width: "100%",
 });
 
 function showAlertifySuccess(message) {
-	$("body").append(alertify.success(message));
-}
-
-function previewFilename(fileId) {
-	const input = document.getElementById(fileId);
-	const fileName = input.files[0].name;
-
-	const label = document.querySelector(`label[for=${fileId}]`);
-	label.textContent = fileName;
+    $("body").append(alertify.success(message));
 }
 
 $(".bs-example-modal-center").on("show.bs.modal", function (e) {
-	var button = $(e.relatedTarget);
-	var id_rekap = button.data("id");
-	var modalButton = $(this).find("#btn-hapus");
-	modalButton.attr("onclick", "delete_data('" + id_rekap + "')");
+    var button = $(e.relatedTarget);
+    var id_absensi = button.data("id");
+    var modalButton = $(this).find("#btn-hapus");
+    modalButton.attr("onclick", "delete_data('" + id_absensi + "')");
 });
 
-function delete_error() {
-	$("#error-id_rekap").hide();
-	$("#error-id_user").hide();
-	$("#error-keterangan").hide();
-	$("#error-file").hide();
-	$("#error-file2").hide();
-}
-
 function delete_form() {
-	$("[name='id_rekap']").val("");
-	$("#id_user").val("").trigger("change");
-	$("[name='keterangan']").val("");
-	resetFileInputLabel("file2");
-	resetFileInputLabel("file");
+    $("[name='id_absensi']").val("");
+    $("#id_user").val("").trigger("change");
+    $("[name='tgl_absen']").val("");
+    $("[name='materi']").val("");
+    $("[name='bukti']").val("");
+    imagePreview.innerHTML = "";
+    $("[name='status']").val("");
 }
 
-function resetFileInputLabel(inputId) {
-	// Get the input element
-	var inputFile = document.getElementById(inputId);
+function delete_error() {
+    $("#error-id_absensi").hide("");
+    $("#error-id_user").hide("");
+    $("#error-tgl_absen").hide("");
+    $("#error-materi").hide("");
+    $("#error-bukti").hide("");
+    $("#file-label").hide("");
+    $("#error-status").hide("");
+}
 
-	// Get the label element associated with the input
-	var label = inputFile.nextElementSibling;
+function previewImage(event) {
+    const imageInput = event.target;
+    const imagePreview = document.getElementById("imagePreview");
 
-	// Reset the label text to "Pilih file"
-	label.innerHTML = "Pilih file";
+    if (imageInput.files && imageInput.files[0]) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            imagePreview.innerHTML = `<img src="${e.target.result}" alt="Preview Image" class="img-thumbnail" style="width: 100px; height: auto;">`;
+        };
+        $("#error-bukti").html("");
+
+        reader.readAsDataURL(imageInput.files[0]);
+    } else {
+        imagePreview.innerHTML = "";
+    }
 }
 
 function get_data() {
-	delete_error();
-	$.ajax({
-		url: base_url + _controller + "/get_data",
-		method: "GET",
-		dataType: "json",
-		success: function (data) {
-			var table = $("#example").DataTable({
-				destroy: true,
-				scrollY: 320,
-				data: data,
-				columns: [
-					{ data: "username" },
-					{ data: "judul" },
-					{ data: "created_at" },
-					{
-						data: null,
-						render: function (data, type, row) {
-							return (
-								// '<button class="btn btn-warning waves-effect waves-light" data-toggle="modal" data-animation="bounce" data-target=".bs-example-modal-center" title="hapus" data-id="' +
-								// row.id_rekap +
-								// '"><i class="ion-trash-b"></i></button> ' +
-								'<button class="btn btn-success" title="unduh" onclick="downloadFile(\'' +
-								row.file_name +
-								'\')"><i class="ion-ios7-cloud-download"></i></button> ' +
-								'<button class="btn btn-info" data-toggle="modal" data-target="#lihat" title="lihat" onclick="submit(' +
-								row.id_rekap +
-								')"><i class="ion-eye"></i></button> '
-							);
-						},
-					},
-				],
-				initComplete: function () {
-					$("th").css("text-align", "center");
+    var formData = new FormData();
+    formData.append("id_user", $("#filterUser").val());
+    $.ajax({
+        url: base_url + "/" + _controller + "/get_data",
+        method: "POST",
+        data: formData,
+        dataType: "json",
+        processData: false,
+        contentType: false,
+        success: function (data) {
+            var table = $("#example").DataTable({
+                destroy: true,
+                searching: false,
+                scrollY: 320,
+                data: data,
+                columns: [
+                    {
+                        data: null,
+                        render: function (data, type, row, meta) {
+                            return meta.row + 1;
+                        },
+                    },
+                    { data: "username" },
+                    { data: "tgl_absen" },
+                    { data: "materi" },
+                    {
+                        data: "bukti",
+                        render: function (data, type, row) {
+                            var imageUrl = base_url + "assets/file/" + data;
+                            return (
+                                '<img src="' +
+                                imageUrl +
+                                '" style="max-height: 200px; max-width: 150px;">'
+                            );
+                        },
+                    },
+                    { data: "status" },
+                ],
+                initComplete: function () {
+                    $("th").css("text-align", "center");
 					$("td").css("text-align", "center");
-				},
-			});
-		},
-		error: function (xhr, textStatus, errorThrown) {
-			console.log(xhr.statusText);
-		},
-	});
-}
+                },
+            });
 
-// function insert_data() {
-// 	var formData = new FormData();
-// 	formData.append("id_rekap", $("[name='id_rekap']").val());
-// 	formData.append("id_user", $("#id_user").val());
-// 	formData.append("keterangan", $("[name='keterangan']").val());
-
-// 	var fileInput = $("[name='file']")[0];
-// 	if (fileInput.files.length > 0) {
-// 		formData.append("file", fileInput.files[0]);
-// 	}
-
-// 	$.ajax({
-// 		type: "POST",
-// 		url: base_url + _controller + "/insert_data",
-// 		data: formData,
-// 		dataType: "json",
-// 		processData: false,
-// 		contentType: false,
-// 		success: function (response) {
-// 			delete_error();
-// 			if (response.errors) {
-// 				for (var fieldName in response.errors) {
-// 					$("#error-" + fieldName).show();
-// 					$("#error-" + fieldName).html(response.errors[fieldName]);
-// 				}
-// 			} else if (response.success) {
-// 				$(".bs-example-modal-lg").modal("hide");
-// 				showAlertifySuccess(response.success);
-// 				get_data();
-// 			}
-// 		},
-// 		error: function (xhr, status, error) {
-// 			console.error("AJAX Error: " + error);
-// 		},
-// 	});
-// }
-
-// function delete_data(x) {
-// 	$.ajax({
-// 		type: "POST",
-// 		data: "id_rekap=" + x,
-// 		dataType: "json",
-// 		url: base_url + _controller + "/delete_data",
-// 		success: function (response) {
-// 			if (response.success) {
-// 				$(".bs-example-modal-center").modal("hide");
-// 				showAlertifySuccess(response.success);
-// 				get_data();
-// 			}
-// 		},
-// 	});
-// }
-
-function downloadFile(fileName) {
-	var downloadUrl = base_url + _controller + "/download_file/" + fileName;
-
-	var link = document.createElement("a");
-	link.href = downloadUrl;
-	link.download = fileName;
-	document.body.appendChild(link);
-	link.click();
-	document.body.removeChild(link);
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            console.log(xhr.statusText);
+        },
+    });
 }
 
 function submit(x) {
-	$.ajax({
-		type: "POST",
-		data: "id_rekap=" + x,
-		url: base_url + "/" + _controller + "/get_data_id",
-		dataType: "json",
-		success: function (hasil) {
-			$("[name='id_rekap']").val(hasil[0].id_rekap);
-			$("[name='id_user']").val(hasil[0].username);
-			$("[name='keterangan']").val(hasil[0].judul);
-			$("[name='waktu']").val(hasil[0].created_at);
-			var url = hasil[0].file_name;
-			$("embed").attr("src", base_url + "assets/file/" + url);
-			$("#btn-download").data("file-name", url);
-		},
-	});
-	delete_error();
-	delete_form();
+    if (x == "tambah") {
+		$("#btn-insert").show();
+		$("#btn-update").hide();
+		$("[name='title']").text("Tambah Absensi");
+	} else {
+		$("#btn-insert").hide();
+		$("#btn-update").show();
+		$("[name='title']").text("Edit Absensi");
+
+    $.ajax({
+        type: "POST",
+        data: "id_absensi=" + x,
+        url: base_url + "/" + _controller + "/get_data_id",
+        dataType: "json",
+        success: function (hasil) {
+            $("[name='id_absensi']").val(hasil[0].id_absensi);
+            $("[name='id_user']").val(hasil[0].id_user).trigger("change");
+            $("[name='tgl_absen']").val(hasil[0].tgl_absen);
+            $("[name='materi']").val(hasil[0].materi);
+            var nama = hasil[0].bukti;
+            imagePreview.innerHTML = `<br><img src="${base_url}assets/file/${nama}" alt="Preview Image" class="img-thumbnail" style="width: 100px; height: auto;">`;
+            $("[name='status']").val(hasil[0].status);
+        },
+    });
+    }
+    delete_form();
+    delete_error();
 }
-
-// function update_data() {
-// 	var formData = new FormData();
-// 	formData.append("id_rekap", $("[name='id_rekap']").val());
-
-// 	var fileInput = $("[name='file2']")[0];
-// 	if (fileInput.files.length > 0) {
-// 		formData.append("file2", fileInput.files[0]);
-// 	}
-
-// 	$.ajax({
-// 		type: "POST",
-// 		url: base_url + _controller + "/edit_data",
-// 		data: formData,
-// 		dataType: "json",
-// 		processData: false,
-// 		contentType: false,
-// 		success: function (response) {
-// 			if (response.errors) {
-// 				delete_error();
-// 				for (var fieldName in response.errors) {
-// 					$("#error-" + fieldName).show();
-// 					$("#error-" + fieldName).html(response.errors[fieldName]);
-// 				}
-// 			} else if (response.success) {
-// 				$("#lihat").modal("hide");
-// 				showAlertifySuccess(response.success);
-// 				get_data();
-// 			}
-// 		},
-// 		error: function (xhr, status, error) {
-// 			console.error("AJAX Error: " + error);
-// 		},
-// 	});
-// }

@@ -36,7 +36,7 @@
             <?php foreach ($absen as $m): ?>
                 <tr>
                     <td>
-                        <?php echo $m->nama; ?>
+                        <?php echo $m->username; ?>
                     </td>
                     <td>
                         <?php echo $m->tgl_absen; ?>

@@ -1,7 +1,7 @@
 get_data();
 
-$("#tb_murid").select2({
-	width: "100%",
+$("#filterUser").select2({
+    width: "100%",
 });
 
 function showAlertifySuccess(message) {
@@ -17,36 +17,53 @@ $(".bs-example-modal-center").on("show.bs.modal", function (e) {
 
 function delete_form() {
 	$("[name='id_tagihan']").val("");
-	$("#id_murid").val("").trigger("change");
+	$("#id_user").val("").trigger("change");
 	$("[name='bulan']").val("");
 	$("[name='jumlah']").val("");
-    $("[name='status_tagihan']").val("");
+	$("[name='status_tagihan']").val("");
 }
 
 function delete_error() {
 	$("#error-id_tagihan").hide();
-	$("#error-id_murid").hide();
+	$("#error-id_user").hide();
 	$("#error-bulan").hide();
 	$("#error-jumlah").hide();
-    $("#error-status_tagihan").hide();
+	$("#error-status_tagihan").hide();
 }
 
 function get_data() {
-	delete_error();
+	var formData = new FormData();
+    formData.append("id_user", $("#filterUser").val());
 	$.ajax({
-		url: base_url + _controller + "/get_data",
-		method: "GET",
-		dataType: "json",
+		url: base_url + "/" + _controller + "/get_data",
+        method: "POST",
+        data: formData,
+        dataType: "json",
+        processData: false,
+        contentType: false,
 		success: function (data) {
 			var table = $("#example").DataTable({
 				destroy: true,
+                searching: false,
 				scrollY: 320,
 				data: data,
 				columns: [
-					{ data: "nama" },
+					{ data: "username" },
 					{ data: "bulan" },
 					{ data: "jumlah" },
-                    { data: "status_tagihan" },
+					{ data: "status_tagihan" },
+					// {
+					// 	data: null,
+					// 	render: function (data, type, row) {
+					// 		return (
+					// 			'<button class="btn btn-warning waves-effect waves-light" data-toggle="modal" data-animation="bounce" data-target=".bs-example-modal-center" title="hapus" data-id="' +
+					// 			row.id_tagihan +
+					// 			'"><i class="ion-trash-b"></i></button> ' +
+					// 			'<button class="btn btn-info" data-toggle="modal" data-target=".bs-example-modal-lg" title="lihat" onclick="submit(' + row.id_tagihan + ')"><i class="ion-edit"></i></button> '
+					// 		);
+
+					// 	},
+					// },
 				],
 				initComplete: function () {
 					$("th").css("text-align", "center");

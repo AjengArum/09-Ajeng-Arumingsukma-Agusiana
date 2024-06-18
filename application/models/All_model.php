@@ -43,7 +43,7 @@ class All_model extends CI_Model
     public function get_layanan()
     {
         $query = [
-            'select' => 'a.id_layanan, b.nama, a.nama_layanan, a.keterangan, a.biaya, a.kuota',
+            'select' => 'a.id_layanan, b.nama, a.nama_layanan, a.keterangan, a.biaya',
             'from' => 'tb_layanan a',
             'join' => [
                 'tb_tentor b, b.id_tentor = a.id_tentor'
@@ -126,7 +126,7 @@ public function get_jadwal()
     echo json_encode($result);
 }
 
-public function get_tagihan()
+public function get_tagihan($id_user)
 {
     $query = [
         'select' => 'a.id_tagihan, b.username, a.bulan, a.jumlah, a.status_tagihan',
@@ -134,7 +134,25 @@ public function get_tagihan()
         'join' => [
             'tb_user b, b.ID = a.id_user',
         ],
-        'where' => ['a.status_tagihan' => 'belum lunas']  // Hanya ambil data dengan status belum lunas
+        'where' => ['a.status_tagihan' => 'belum lunas',
+        'a.id_user' => $id_user 
+        ] // Hanya ambil data dengan status belum lunas
+    ];
+    $result = $this->data->get($query)->result();
+    echo json_encode($result);
+}
+
+public function get_absen($id_user)
+{
+    $query = [
+        'select' => 'a.id_absensi, a.tgl_absen, a.materi, a.bukti, a.status, b.username',
+        'from' => 'tb_absen a',
+        'join' => [
+            'tb_user b, b.ID = a.id_user'
+        ],
+        'where' => [
+            'a.id_user' => $id_user
+        ]
     ];
     $result = $this->data->get($query)->result();
     echo json_encode($result);
@@ -251,96 +269,63 @@ public function get_tagihan()
     //     }
     // }
 
-    // public function absen($id_user, $tgl_absen, $materi, $status) {
-    //     // Check if the id_user already exists
-    //     $existingAbsen = $this->db->get_where('tb_absen', ['id_user' => $id_user])->row_array();
-    //     if ($existingAbsen) {
-    //         return [
-    //             "success" => false,
-    //             'message' => 'id_user already exists'
-    //         ];
-    //     }
-    
-    //     $imagePath = null;
-    //     if (!empty($_FILES['bukti']['name'])) {
-    //         $config['upload_path'] = './assets/laporan/';
-    //         $config['allowed_types'] = 'jpeg|png|jpg|gif';
-    //         $config['max_size'] = 2048;
-    //         $config['file_name'] = time();
-    
-    //         $this->load->library('upload', $config);
-    
-    //         if ($this->upload->do_upload('bukti')) {
-    //             $uploadData = $this->upload->data();
-    //             $imagePath = 'assets/laporan/' . $uploadData['file_name'];
-    //         } else {
-    //             return [
-    //                 "success" => false,
-    //                 'message' => 'Gagal mengunggah foto: ' . $this->upload->display_errors()
-    //             ];
-    //         }
-    //     }
-    
-    //     $data = [
-    //         'id_user' => $id_user,
-    //         'tgl_absen' => $tgl_absen,
-    //         'materi' => $materi,
-    //         'bukti' => $imagePath,
-    //         'status' => $status
-    //     ];
-    
-    //     // Insert the data into the database
-    //     $inserted = $this->db->insert('tb_absen', $data);
-    //     if ($inserted) {
-    //         return [
-    //             "success" => true,
-    //             'message' => 'Berhasil melakukan pendaftaran',
-    //             'data' => $data
-    //         ];
-    //     } else {
-    //         return [
-    //             "success" => false,
-    //             'message' => 'Gagal melakukan pendaftaran'
-    //         ];
-    //     }
-    // }
-
     public function absen($id_user, $tgl_absen, $materi, $bukti, $status) {
-        // Check if the id_user already exists
-        $existingAbsen = $this->db->get_where('tb_absen', ['id_user' => $id_user])->row_array();
-        if ($existingAbsen) {
-            return [
-                "success" => false,
-                'message' => 'id_user already exists'
-            ];
+        $id_user = $this->input->post('id_user');
+        $tgl_absen = $this->input->post('tgl_absen');
+        $materi = $this->input->post('materi');
+        // Handle file upload
+        $bukti = null;
+        if (!empty($_FILES['bukti']['name'])) {
+            $config['upload_path'] = './assets/file/';
+            $config['allowed_types'] = 'jpeg|png|jpg|gif';
+            $config['max_size'] = 2048;
+            $config['file_name'] = time();
+
+            $this->upload->initialize($config);
+
+            if ($this->upload->do_upload('bukti')) {
+                $uploadData = $this->upload->data();
+                $bukti = 'assets/file/' . $uploadData['file_name'];
+            } else {
+                $this->response([
+                    "success" => false,
+                    'message' => 'Gagal mengunggah foto: ' . $this->upload->display_errors()
+                ], RestController::HTTP_INTERNAL_SERVER_ERROR);
+                return;
+            }
         }
+        $status = $this->input->post('status');
 
-        $data = [
-            'id_user' => $id_user,
-            'tgl_absen' => $tgl_absen,
-            'materi' => $materi,
-            'bukti' => $bukti,
-            'status' => $status
-        ];
+        // Call model method
+        $result = $this->all->absen($id_user, $tgl_absen, $materi, $bukti, $status);
 
-        // Insert the data into the database
-        $inserted = $this->db->insert('tb_absen', $data);
-        if ($inserted) {
-            return [
-                "success" => true,
-                'message' => 'Berhasil melakukan pendaftaran',
-                'data' => $data
-            ];
+        if ($result["success"]) {
+            $this->response($result, RestController::HTTP_OK);
         } else {
-            return [
-                "success" => false,
-                'message' => 'Gagal melakukan pendaftaran'
-            ];
+            $this->response($result, RestController::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
-    
 
-    public function daftar($id_user, $id_layanan, $nama, $asal_sekolah, $kelas)
+//     public function absen($id_user, $tgl_absen, $materi, $bukti, $status) {
+//     $data = [
+//         'id_user' => $id_user,
+//         'tgl_absen' => $tgl_absen,
+//         'materi' => $materi,
+//         'bukti' => $bukti,
+//         'status' => $status,
+//     ];
+
+//     // Assuming this method saves the data and returns true on success
+//     $insert = $this->db->insert('tb_absensi', $data);
+
+//     if ($insert) {
+//         return ["success" => true, "message" => "Absensi berhasil"];
+//     } else {
+//         return ["success" => false, "message" => "Gagal menyimpan absensi"];
+//     }
+// }
+
+    public function daftar($id_user, $id_layanan, $nama, $asal_sekolah)
     {
         // Check if the username or email already exists
         $existingMurid = $this->db->get_where('tb_murid', ['id_user' => $id_user])->row_array();
@@ -354,7 +339,6 @@ public function get_tagihan()
             'id_user' => $id_user,
             'nama' => $nama,
             'asal_sekolah' => $asal_sekolah,
-            'kelas' => $kelas,
             'id_layanan' => $id_layanan
         ];
         // Insert the data into the database

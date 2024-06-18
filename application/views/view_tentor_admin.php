@@ -7,7 +7,7 @@
                     <li class="breadcrumb-item active">Tentor</li>
                 </ol>
             </div>
-            <h4 class="page-title"> Data Tentor </h4><br>
+            <h4 class="page-title"> Tentor </h4><br>
             <p class="text-muted font-14">Berikut ini adalah daftar tentor yang mengajar pada Lembaga Bimbingan Belajar Ang Lesson <br>
                 Klik "Tambah Tentor" untuk menambah data tentor baru
             </p>

@@ -73,8 +73,9 @@ $route['about'] = 'About';
 
 //API
 $route['pembayaran_json/(:num)'] = 'api/Manage_all/get_pembayaran/$1';
-$route['pembayaran_json'] = 'api/Manage_all/get_pembayaran';
-$route['tagihan_json'] = 'api/Manage_all/get_tagihan';
+$route['tagihan_json/(:num)'] = 'api/Manage_all/get_tagihan/$1';
+//$route['pembayaran_json'] = 'api/Manage_all/get_pembayaran';
+//$route['tagihan_json'] = 'api/Manage_all/get_tagihan';
 $route['api/manage_all/insert_murid'] = 'api/manage_all/insert_murid_post';
 $route['api/manage_all/KelolaLayanan'] = 'api/Manage_all/get_layanan';
 $route['api/manage_all/KelolaRekap'] = 'api/Manage_all/get_rekap';
@@ -87,11 +88,11 @@ $route['api/manage_all/login'] = 'api/Manage_all/login_post';
 $route['kelola_android'] = 'api/Manage_all/get_layanan';
 $route['kelola_daftar'] = 'api/Manage_all/daftar_post';
 // $route['kelola_absen'] = 'api/Manage_all/insert_absen_post';
-$route['kelola_absen'] = 'api/Manage_all/insert_absen';
+$route['kelola_absen'] = 'api/Manage_all/absen';
 $route['kelola_tentor_android'] = 'api/Manage_all/get_tentor';
 $route['kelola_jadwal_ku'] = 'api/Manage_all/get_jadwal';
 
-
+$route['absen/(:num)'] = 'api/Manage_all/get_absen/$1';
 $route['rekap/(:num)'] = 'api/Manage_all/get_rekap/$1';
 
 

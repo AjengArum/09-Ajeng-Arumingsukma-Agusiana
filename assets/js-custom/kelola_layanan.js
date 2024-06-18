@@ -23,7 +23,6 @@ function delete_form() {
 	$("[name='nama_layanan']").val("");
 	$("[name='keterangan']").val("");
 	$("[name='biaya']").val("");
-	$("[name='kuota']").val("");
 }
 
 function delete_error() {
@@ -32,7 +31,6 @@ function delete_error() {
 	$("#error-nama_layanan").hide();
 	$("#error-keterangan").hide();
 	$("#error-biaya").hide();
-	$("#error-kuota").hide();
 }
 
 function get_data() {
@@ -51,7 +49,6 @@ function get_data() {
 					{ data: "nama_layanan" },
                     { data: "keterangan" },
 					{ data: "biaya" },
-                    { data: "kuota" },
                     {
                         data: null,
                         render: function (data, type, row) {
@@ -98,7 +95,6 @@ function submit(x) {
             $("[name='nama_layanan']").val(hasil[0].nama_layanan);
             $("[name='keterangan']").val(hasil[0].keterangan);
             $("[name='biaya']").val(hasil[0].biaya);
-            $("[name='kuota']").val(hasil[0].kuota);
         },
     });
 }
@@ -114,7 +110,6 @@ function insert_data() {
 	formData.append("nama_layanan", $("[name='nama_layanan']").val());
 	formData.append("keterangan", $("[name='keterangan']").val());
 	formData.append("biaya", $("[name='biaya']").val());
-	formData.append("kuota", $("[name='kuota']").val());
 
 	$.ajax({
 		type: "POST",
@@ -149,7 +144,6 @@ function edit_data() {
 	formData.append("nama_layanan", $("[name='nama_layanan']").val());
 	formData.append("keterangan", $("[name='keterangan']").val());
 	formData.append("biaya", $("[name='biaya']").val());
-	formData.append("kuota", $("[name='kuota']").val());
 
 	$.ajax({
 		type: "POST",

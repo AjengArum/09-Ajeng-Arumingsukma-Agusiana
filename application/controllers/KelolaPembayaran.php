@@ -26,19 +26,6 @@ class KelolaPembayaran extends CI_Controller
         $this->load->view('js-custom', $this->app_data);
     }
 
-    // public function get_data()
-    // {
-    //     $query = [
-    //         'select' => 'a.id_tagihan, b.username, a.bulan, a.jumlah, a.status_tagihan',
-    //         'from' => 'tb_tagihan a',
-    //         'join' => [
-    //             'tb_user b, b.ID = a.id_user',
-    //         ]
-    //     ];
-    //     $result = $this->data->get($query)->result();
-    //     echo json_encode($result);
-    // }
-
     public function get_data()
     {
     $query = [
@@ -47,7 +34,7 @@ class KelolaPembayaran extends CI_Controller
         'join' => [
             'tb_user b, b.ID = a.id_user',
         ],
-        'where' => ['a.status_tagihan' => 'belum lunas']  // Hanya ambil data dengan status belum lunas
+        'where' => ['a.status_tagihan' => 'belum lunas']  
     ];
     $result = $this->data->get($query)->result();
     echo json_encode($result);

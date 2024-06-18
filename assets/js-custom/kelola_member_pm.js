@@ -25,7 +25,6 @@ function delete_form() {
 	$("#id_layanan").val("").trigger("change");
 	$("[name='nama']").val("");
 	$("[name='asal_sekolah']").val("");
-	$("[name='kelas']").val("");
 }
 
 function delete_error() {
@@ -34,7 +33,6 @@ function delete_error() {
 	$("#error-id_layanan").hide();
 	$("#error-nama").hide();
 	$("#error-asal_sekolah").hide();
-	$("#error-kelas").hide();
 }
 
 function get_data() {
@@ -53,7 +51,6 @@ function get_data() {
 					{ data: "username" },
 					{ data: "nama_layanan" },
 					{ data: "asal_sekolah" },
-					{ data: "kelas" },
 				],
 				initComplete: function () {
 					$("th").css("text-align", "center");

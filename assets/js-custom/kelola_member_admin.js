@@ -25,7 +25,6 @@ function delete_form() {
 	$("#id_layanan").val("").trigger("change");
 	$("[name='nama']").val("");
 	$("[name='asal_sekolah']").val("");
-	$("[name='kelas']").val("");
 }
 
 function delete_error() {
@@ -34,7 +33,6 @@ function delete_error() {
 	$("#error-id_layanan").hide();
 	$("#error-nama").hide();
 	$("#error-asal_sekolah").hide();
-	$("#error-kelas").hide();
 }
 
 function get_data() {
@@ -53,7 +51,6 @@ function get_data() {
 					{ data: "username" },
 					{ data: "nama_layanan" },
 					{ data: "asal_sekolah" },
-					{ data: "kelas" },
 					{
 						data: null,
 						render: function (data, type, row) {
@@ -100,7 +97,6 @@ function get_data() {
             $("[name='id_layanan']").val(hasil[0].id_layanan).trigger("change");
             $("[name='nama']").val(hasil[0].nama);
             $("[name='asal_sekolah']").val(hasil[0].asal_sekolah);
-            $("[name='kelas']").val(hasil[0].kelas);
         },
     });
 	}
@@ -115,7 +111,6 @@ function insert_data() {
 	formData.append("id_layanan", $("#id_layanan").val());
 	formData.append("nama", $("[name='nama']").val());
 	formData.append("asal_sekolah", $("[name='asal_sekolah']").val());
-	formData.append("kelas", $("[name='kelas']").val());
 
 	$.ajax({
 		type: "POST",
@@ -166,7 +161,6 @@ function edit_data() {
 	formData.append("id_layanan", $("#id_layanan").val());
 	formData.append("nama", $("[name='nama']").val());
 	formData.append("asal_sekolah", $("[name='asal_sekolah']").val());
-	formData.append("kelas", $("[name='kelas']").val());
   
 	$.ajax({
 	  type: "POST",

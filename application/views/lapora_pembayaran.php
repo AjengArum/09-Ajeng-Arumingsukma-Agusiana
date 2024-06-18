@@ -23,15 +23,15 @@
 <h4>Daftar Tagihan</h4>
         <table>
             <tr>
-                <th>Murid</th>
+                <th>Username</th>
                 <th>Bulan</th>
-                <th>Jumlah Sekolah</th>
+                <th>Jumlah</th>
                 <th>Status</th>
             </tr>
-            <?php foreach ($murid as $m): ?>
+            <?php foreach ($pembayaran as $m): ?>
                 <tr>
                     <td>
-                        <?php echo $m->nama; ?>
+                        <?php echo $m->username; ?>
                     </td>
                     <td>
                         <?php echo $m->bulan; ?>
