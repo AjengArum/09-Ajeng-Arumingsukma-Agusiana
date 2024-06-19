@@ -91,7 +91,7 @@ $route['kelola_daftar'] = 'api/Manage_all/daftar_post';
 $route['kelola_absen'] = 'api/Manage_all/absen';
 $route['kelola_tentor_android'] = 'api/Manage_all/get_tentor';
 $route['kelola_jadwal_ku'] = 'api/Manage_all/get_jadwal';
-
+$route['edit_tagihan'] = 'api/Manage_all/edit_tagihan';
 $route['absen/(:num)'] = 'api/Manage_all/get_absen/$1';
 $route['rekap/(:num)'] = 'api/Manage_all/get_rekap/$1';
 

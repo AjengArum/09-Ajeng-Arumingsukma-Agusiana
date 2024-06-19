@@ -158,6 +158,16 @@ public function get_absen($id_user)
     echo json_encode($result);
 }
 
+public function update_tagihan($id)
+    {
+        $this->data->update('tb_tagihan', array('id_tagihan' => $id_tagihan), array('status_tagihan' => 'lunas'));
+        return [
+            "success" => "true",
+            'message' => 'Data tagihan berhasil diupdate'
+        ];
+    }
+
+
 // public function get_pembayaran()
 // {
 //     $query = [
@@ -311,33 +321,25 @@ public function get_absen($id_user)
 
     public function absen($id_user, $tgl_absen, $materi, $bukti, $status)
     {
-        // Check if the username or email already exists
-        $existingMurid = $this->db->get_where('tb_absen', ['id_user' => $id_user])->row_array();
-        if ($existingMurid) {
-            return [
-                "success" => false,
-                'message' => 'id_user already exists'
-            ];
-        }
         $data = [
             'id_user' => $id_user,
             'tgl_absen' => $tgl_absen,
             'materi' => $materi,
             'bukti' => $bukti,
-            'status' => $status
+            'status' => 'menunggu_validasi'
         ];
         // Insert the data into the database
         $inserted = $this->db->insert('tb_absen', $data);
         if ($inserted) {
             return [
                 "success" => true,
-                'message' => 'Berhasil melakukan pendaftaran',
+                'message' => 'Berhasil melakukan absensi',
                 'data' => $data
             ];
         } else {
             return [
                 "success" => false,
-                'message' => 'Gagal melakukan pendaftaran'
+                'message' => 'Gagal melakukan absensi'
             ];
         }
     }
