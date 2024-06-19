@@ -269,61 +269,78 @@ public function get_absen($id_user)
     //     }
     // }
 
-    public function absen($id_user, $tgl_absen, $materi, $bukti, $status) {
-        $id_user = $this->input->post('id_user');
-        $tgl_absen = $this->input->post('tgl_absen');
-        $materi = $this->input->post('materi');
-        // Handle file upload
-        $bukti = null;
-        if (!empty($_FILES['bukti']['name'])) {
-            $config['upload_path'] = './assets/file/';
-            $config['allowed_types'] = 'jpeg|png|jpg|gif';
-            $config['max_size'] = 2048;
-            $config['file_name'] = time();
+    // public function absen($id_user, $tgl_absen, $materi, $bukti, $status)
+    // {
+    //     // Handle file upload
+    //     $bukti = null;
+    //     if (!empty($_FILES['bukti']['name'])) {
+    //         $config['upload_path'] = './assets/file/';
+    //         $config['allowed_types'] = 'jpeg|png|jpg|gif';
+    //         $config['max_size'] = 2048;
+    //         $config['file_name'] = time();
 
-            $this->upload->initialize($config);
+    //         $this->load->library('upload', $config);
 
-            if ($this->upload->do_upload('bukti')) {
-                $uploadData = $this->upload->data();
-                $bukti = 'assets/file/' . $uploadData['file_name'];
-            } else {
-                $this->response([
-                    "success" => false,
-                    'message' => 'Gagal mengunggah foto: ' . $this->upload->display_errors()
-                ], RestController::HTTP_INTERNAL_SERVER_ERROR);
-                return;
-            }
+    //         if ($this->upload->do_upload('bukti')) {
+    //             $uploadData = $this->upload->data();
+    //             $bukti = 'assets/file/' . $uploadData['file_name'];
+    //         } else {
+    //             return [
+    //                 "success" => false,
+    //                 'message' => 'Gagal mengunggah foto: ' . $this->upload->display_errors()
+    //             ];
+    //         }
+    //     }
+
+    //     $data = [
+    //         'id_user' => $id_user,
+    //         'tgl_absen' => $tgl_absen,
+    //         'materi' => $materi,
+    //         'bukti' => $bukti,
+    //         'status' => $status
+    //     ];
+
+    //     $this->db->insert('tb_absen', $data);
+
+    //     if ($this->db->affected_rows() > 0) {
+    //         return ["success" => true];
+    //     } else {
+    //         return ["success" => false];
+    //     }
+    // }
+
+    public function absen($id_user, $tgl_absen, $materi, $bukti, $status)
+    {
+        // Check if the username or email already exists
+        $existingMurid = $this->db->get_where('tb_absen', ['id_user' => $id_user])->row_array();
+        if ($existingMurid) {
+            return [
+                "success" => false,
+                'message' => 'id_user already exists'
+            ];
         }
-        $status = $this->input->post('status');
-
-        // Call model method
-        $result = $this->all->absen($id_user, $tgl_absen, $materi, $bukti, $status);
-
-        if ($result["success"]) {
-            $this->response($result, RestController::HTTP_OK);
+        $data = [
+            'id_user' => $id_user,
+            'tgl_absen' => $tgl_absen,
+            'materi' => $materi,
+            'bukti' => $bukti,
+            'status' => $status
+        ];
+        // Insert the data into the database
+        $inserted = $this->db->insert('tb_absen', $data);
+        if ($inserted) {
+            return [
+                "success" => true,
+                'message' => 'Berhasil melakukan pendaftaran',
+                'data' => $data
+            ];
         } else {
-            $this->response($result, RestController::HTTP_INTERNAL_SERVER_ERROR);
+            return [
+                "success" => false,
+                'message' => 'Gagal melakukan pendaftaran'
+            ];
         }
     }
-
-//     public function absen($id_user, $tgl_absen, $materi, $bukti, $status) {
-//     $data = [
-//         'id_user' => $id_user,
-//         'tgl_absen' => $tgl_absen,
-//         'materi' => $materi,
-//         'bukti' => $bukti,
-//         'status' => $status,
-//     ];
-
-//     // Assuming this method saves the data and returns true on success
-//     $insert = $this->db->insert('tb_absensi', $data);
-
-//     if ($insert) {
-//         return ["success" => true, "message" => "Absensi berhasil"];
-//     } else {
-//         return ["success" => false, "message" => "Gagal menyimpan absensi"];
-//     }
-// }
 
     public function daftar($id_user, $id_layanan, $nama, $asal_sekolah)
     {
