@@ -197,12 +197,11 @@ public function edit_tagihan()
 public function absen_post()
 {
     $id_user = $this->input->post('id_user');
-    $tgl_absen = $this->input->post('tgl_absen');
+    $tanggal = $this->input->post('tanggal');
     $materi = $this->input->post('materi');
-    $bukti = $this->input->post('bukti');
     $status = 'menunggu_validasi';
 
-    $result = $this->all->absen($id_user, $tgl_absen, $materi, $bukti, $status);
+    $result = $this->all->absen($id_user, $tanggal, $materi, $status);
 
     if ($result["success"]) {
         $this->response($result, RestController::HTTP_OK);

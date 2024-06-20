@@ -40,7 +40,6 @@
                     <th width="15%">Tentor</th>
                     <th width="15%">Tanggal</th>
                     <th width="15%">Materi</th>
-                    <th width="15%">Bukti</th>
                     <th width="15%">Status</th>
                 </tr>
             </thead>

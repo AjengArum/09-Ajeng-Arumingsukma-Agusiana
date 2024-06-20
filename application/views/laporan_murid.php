@@ -26,7 +26,6 @@
                 <th>Nama</th>
                 <th>layanan</th>
                 <th>Asal Sekolah</th>
-                <th>Kelas</th>
             </tr>
             <?php foreach ($murid as $m): ?>
                 <tr>
@@ -38,9 +37,6 @@
                     </td>
                     <td>
                         <?php echo $m->asal_sekolah; ?>
-                    </td>
-                    <td>
-                        <?php echo $m->kelas; ?>
                     </td>
                 </tr>
             <?php endforeach; ?>

@@ -34,7 +34,7 @@ class LihatRekap extends CI_Controller
     {
         $user = $this->input->post('id_user');
         $query = [
-            'select' => 'a.id_absensi, a.tgl_absen, a.materi, a.bukti, a.status, b.username',
+            'select' => 'a.id_absensi, a.tanggal, a.materi, a.status, b.username',
             'from' => 'tb_absen a',
             'join' => [
                 'tb_user b, b.ID = a.id_user'
@@ -70,7 +70,7 @@ class LihatRekap extends CI_Controller
     {
         $id_user = $this->input->post('filterUser');
         $query = [
-            'select' => 'a.id_absensi, a.tgl_absen, a.materi, a.bukti, a.status, b.username',
+            'select' => 'a.id_absensi, a.tanggal, a.materi, a.status, b.username',
             'from' => 'tb_absen a',
             'join' => [
                 'tb_user b, b.ID = a.id_user'

@@ -145,7 +145,7 @@ public function get_tagihan($id_user)
 public function get_absen($id_user)
 {
     $query = [
-        'select' => 'a.id_absensi, a.tgl_absen, a.materi, a.bukti, a.status, b.username',
+        'select' => 'a.id_absensi, a.tanggal, a.materi, a.status, b.username',
         'from' => 'tb_absen a',
         'join' => [
             'tb_user b, b.ID = a.id_user'
@@ -281,51 +281,53 @@ public function update_tagihan($id)
 
     // public function absen($id_user, $tgl_absen, $materi, $bukti, $status)
     // {
-    //     // Handle file upload
-    //     $bukti = null;
-    //     if (!empty($_FILES['bukti']['name'])) {
-    //         $config['upload_path'] = './assets/file/';
-    //         $config['allowed_types'] = 'jpeg|png|jpg|gif';
-    //         $config['max_size'] = 2048;
-    //         $config['file_name'] = time();
-
-    //         $this->load->library('upload', $config);
-
-    //         if ($this->upload->do_upload('bukti')) {
-    //             $uploadData = $this->upload->data();
-    //             $bukti = 'assets/file/' . $uploadData['file_name'];
+    //     // Nama file untuk bukti
+    //     $file_bukti = $this->post('file_bukti');
+    
+    //     // Memuat helper file
+    //     $this->load->helper('file');
+    
+    //     // Menyimpan file bukti
+    //     $uploaded = write_file('./assets/file/' . $file_bukti, base64_decode($bukti));
+    
+    //     if ($uploaded) {
+    //         $data = [
+    //             'id_user' => $id_user,
+    //             'tgl_absen' => $tgl_absen,
+    //             'materi' => $materi,
+    //             'bukti' => $file_bukti,
+    //             'status' => 'menunggu_validasi'
+    //         ];
+    
+    //         // Insert the data into the database
+    //         $inserted = $this->db->insert('tb_absen', $data);
+    //         if ($inserted) {
+    //             return [
+    //                 "success" => true,
+    //                 'message' => 'Berhasil melakukan absensi',
+    //                 'data' => $data
+    //             ];
     //         } else {
     //             return [
     //                 "success" => false,
-    //                 'message' => 'Gagal mengunggah foto: ' . $this->upload->display_errors()
+    //                 'message' => 'Gagal melakukan absensi'
     //             ];
     //         }
-    //     }
-
-    //     $data = [
-    //         'id_user' => $id_user,
-    //         'tgl_absen' => $tgl_absen,
-    //         'materi' => $materi,
-    //         'bukti' => $bukti,
-    //         'status' => $status
-    //     ];
-
-    //     $this->db->insert('tb_absen', $data);
-
-    //     if ($this->db->affected_rows() > 0) {
-    //         return ["success" => true];
     //     } else {
-    //         return ["success" => false];
+    //         return [
+    //             "success" => false,
+    //             'message' => 'Gagal mengunggah bukti'
+    //         ];
     //     }
     // }
+    
 
-    public function absen($id_user, $tgl_absen, $materi, $bukti, $status)
+    public function absen($id_user, $tanggal, $materi, $status)
     {
         $data = [
             'id_user' => $id_user,
-            'tgl_absen' => $tgl_absen,
+            'tanggal' => $tanggal,
             'materi' => $materi,
-            'bukti' => $bukti,
             'status' => 'menunggu_validasi'
         ];
         // Insert the data into the database

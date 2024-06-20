@@ -30,7 +30,6 @@
                 <th>Tentor</th>
                 <th>Tanggal</th>
                 <th>Materi</th>
-                <th>Bukti</th>
                 <th>Status</th>
             </tr>
             <?php foreach ($absen as $m): ?>
@@ -43,9 +42,6 @@
                     </td>
                     <td>
                         <?php echo $m->materi; ?>
-                    </td>
-                    <td>
-                    <img src="<?php echo base_url('assets/file/' . $m->bukti); ?>" alt="Bukti Absensi">
                     </td>
                     <td>
                         <?php echo $m->status; ?>

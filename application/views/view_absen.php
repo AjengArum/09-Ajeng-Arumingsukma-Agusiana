@@ -40,7 +40,6 @@
                     <th width="15%">Tentor</th>
                     <th width="15%">Tanggal</th>
                     <th width="15%">Materi</th>
-                    <th width="15%">Bukti</th>
                     <th width="15%">Status</th>
                     <th width="10%">Aksi</th>
                 </tr>
@@ -114,9 +113,9 @@
                 <div class="form-group row">
                     <label for="example-text-input" class="col-sm-3 col-form-label">Tanggal</label>
                     <div class="col-sm-9">
-                        <textarea required class="form-control" rows="1" id="tgl_absen" name="tgl_absen"
+                        <textarea required class="form-control" rows="1" id="tanggal" name="tanggal"
                             placeholder="Masukkan tanggal"></textarea>
-                        <small class="text-danger pl-1" id="error-tgl_absen"></small>
+                        <small class="text-danger pl-1" id="error-tanggal"></small>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -126,13 +125,6 @@
                             placeholder="Masukkan Materi"></textarea>
                         <small class="text-danger pl-1" id="error-materi"></small>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label>Bukti</label>
-                    <input type="file" name="bukti" id="bukti" class="form-control" onchange="previewImage(event)">
-                    <small class="text-gray pl-1" id="file-label"></small><br>
-                    <div id="imagePreview"></div>
-                    <small class="text-danger pl-1" id="error-bukti"></small>
                 </div>
                 <div class="form-group row">
                     <label for="example-text-input" class="col-sm-3 col-form-label">Status</label>
