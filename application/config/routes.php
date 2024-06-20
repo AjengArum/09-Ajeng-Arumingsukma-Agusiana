@@ -87,6 +87,7 @@ $route['api/manage_all/register'] = 'api/Manage_all/register_post';
 $route['api/manage_all/login'] = 'api/Manage_all/login_post';
 $route['kelola_android'] = 'api/Manage_all/get_layanan';
 $route['kelola_daftar'] = 'api/Manage_all/daftar_post';
+$route['midtrans/charge'] = 'midtrans/charge';
 // $route['kelola_absen'] = 'api/Manage_all/insert_absen_post';
 $route['kelola_absen'] = 'api/Manage_all/absen';
 $route['kelola_tentor_android'] = 'api/Manage_all/get_tentor';
