@@ -142,7 +142,7 @@ class Manage_all extends RestController
     }
 }
 
-public function edit_tagihan()
+public function edit_tagihan_post()
 {
     $id_tagihan = $this->input->post('id_tagihan');
 
