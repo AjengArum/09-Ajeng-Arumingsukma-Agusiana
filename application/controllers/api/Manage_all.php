@@ -30,6 +30,19 @@ class Manage_all extends RestController
     // {
     //     $this->response($this->all->get_pembayaran(), RestController::HTTP_OK);
     // }
+    
+    public function edit_tagihan_post($id)
+{
+    // $id_tagihan = $this->input->get('id_tagihan');
+
+    $result = $this->all->update_tagihan($id);
+
+    if ($result["success"]) {
+        $this->response($result, RestController::HTTP_OK);
+    } else {
+        $this->response($result, RestController::HTTP_INTERNAL_SERVER_ERROR);
+    }
+}
 
     public function get_pembayaran_get($id_user)
     {
@@ -142,18 +155,7 @@ class Manage_all extends RestController
     }
 }
 
-public function edit_tagihan_post()
-{
-    $id_tagihan = $this->input->post('id_tagihan');
 
-    $result = $this->all->update_tagihan($id_tagihan);
-
-    if ($result["success"]) {
-        $this->response($result, RestController::HTTP_OK);
-    } else {
-        $this->response($result, RestController::HTTP_INTERNAL_SERVER_ERROR);
-    }
-}
 
 // public function absen_post()
 // {
